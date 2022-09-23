@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ParcelWarehouseManagementSupport.Models.Return>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Returns</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourierId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParcelsNUMBER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAdded)
+            </th>
+            <th>
+                Manage
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.courier.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParcelsNUMBER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.ReturnId">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

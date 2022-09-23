@@ -1,0 +1,57 @@
+﻿@model ParcelWarehouseManagementSupport.Models.Return
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Hello @User.Identity.Name </h1>
+<br />
+<h1>Manage your return</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ReturnId" />
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <br />
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="CourierId" class="form-control" />
+                <span asp-validation-for="CourierId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParcelsNUMBER" class="control-label"></label>
+                <input asp-for="ParcelsNUMBER" class="form-control" />
+                <span asp-validation-for="ParcelsNUMBER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="DeliveryId" class="form-control" />
+                <span asp-validation-for="DeliveryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="DateAdded" class="form-control" />
+                <span asp-validation-for="DateAdded" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<center><h2><span class="text-danger">@TempData["ErrorMess"]</span></h2></center>
+<br />
+<div>
+    <a asp-action="Index">All Returns</a>
+</div>
+<div>
+    <a asp-controller="Deliveries" asp-action="Index">Back to Deliveries</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

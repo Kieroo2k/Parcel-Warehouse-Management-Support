@@ -1,0 +1,86 @@
+﻿@model ParcelWarehouseManagementSupport.Models.Delivery
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Delivery details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ParcelsNUMBER)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ParcelsNUMBER)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CourierId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.courier.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SenderId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.sender.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RecipientId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.recipient.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.recipient.Address.StreetName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.recipient.Address.FullStreet)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.recipient.Address.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.recipient.Address.FullCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalWeight)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalWeight)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DestinationId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DestinationId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Fee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fee)
+        </dd>
+        @if (Model.Fee == 1)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Paid)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Paid)
+            </dd>
+
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

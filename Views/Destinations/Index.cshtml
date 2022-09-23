@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ParcelWarehouseManagementSupport.Models.Destination>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@if (User.IsInRole("Admin"))
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DestinationCountry)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BelongToEuropeanUnion)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationCountry)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BelongToEuropeanUnion)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.DestinationId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.DestinationId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.DestinationId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DestinationCountry)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BelongToEuropeanUnion)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationCountry)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BelongToEuropeanUnion)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.DestinationId">Details</a> |
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ParcelWarehouseManagementSupport.Models.Courier>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Courier List</h1>
+
+<form method="post" asp-action"index">
+    <p>Find Courier:</p>
+    <input name="query" type="text" />
+    <input type="submit" value="Find" class="btn-success" />
+</form>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @if (item.Email.Equals("kulikbart@gmail.com"))
+            {
+                continue;
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.CourierId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CourierId">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<a asp-area="" asp-controller="Deliveries" asp-action="Index"><h2>Deliveries</h2></a>
+<br />
+<a asp-area="" asp-controller="Returns" asp-action="Index"><h2>Returns</h2></a>
+<br />
+<a asp-area="" asp-controller="Senders" asp-action="Index"><h2>Senders</h2></a>
+<br />
+<a asp-area="" asp-controller="Recipients" asp-action="Index"><h2>Recipients</h2></a>

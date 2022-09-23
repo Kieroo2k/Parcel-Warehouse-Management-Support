@@ -1,0 +1,264 @@
+﻿@model IEnumerable<ParcelWarehouseManagementSupport.Models.Delivery>
+
+@{
+    ViewBag.Title = "ChartView";
+}
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (User.IsInRole("Admin"))
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParcelsNUMBER)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourierId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SenderId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RecipientId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalWeight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DestinationId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Paid)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParcelsNUMBER)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.courier.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sender.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.recipient.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalWeight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.destination.DestinationCountry)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fee)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Paid)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <br />
+    <center><h1>Delivery transmission</h1></center>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Transmission.DeliveryNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Transmission.ParcelsNUMBER)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Transmission.CourierId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Transmission.SenderId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Transmission.RecipientId)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewData["Transmissions"] as IEnumerable<Transmission>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParcelsNUMBER)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.courier.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sender.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.recipient.LastName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+else
+{
+    <center><h1>Your Deliveries</h1></center>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParcelsNUMBER)
+                </th>
+                <th>
+                    Details
+                </th>
+                <th>
+                    Manage
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParcelsNUMBER)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.DeliveryId">Details</a>
+                    </td>
+                    <td>
+                        <center>
+                            <form method="post" asp-action="index" asp-route-id="@item.DeliveryId">
+                                <input type="submit" value="Transmite" class="btn-success" name="Transmite" />
+                            </form>
+                            <br />
+                            <form method="post" asp-action="index" asp-route-id="@item.DeliveryId">
+                                <input type="submit" value="Return" class="btn-success" name="Return" />
+                            </form>
+                        </center>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <a asp-controller="Returns" asp-action="index">Show all Returns</a>
+    <center><h2><span class="text-danger">@TempData["ErrorMes"]</span></h2></center>
+    <br />
+    <center><h1>Delivery transmission</h1></center>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Transmission.DeliveryNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Transmission.ParcelsNUMBER)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Transmission.CourierId)
+                </th>
+                <th>
+                    Details
+                </th>
+                <th>
+                    Manage
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewData["Transmissions"] as IEnumerable<Transmission>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParcelsNUMBER)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.courier.FullName)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.DeliveryId">Details</a>
+                    </td>
+                    <td>
+                        @if (@ViewBag.ActualUserId != item.CourierId)
+                        {
+                            <form method="post" asp-action="index" asp-route-id="@item.DeliveryId">
+                                <center><input type="submit" value="Claim" class="btn-success" name="Claim" /></center>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" asp-action="index" asp-route-id="@item.DeliveryId">
+                                <center><input type="submit" value="Cancel" class="btn-danger" name="Claim" /></center>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <br />
+    <br />
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                theme: "dark2",
+                animationEnabled: true,
+                title: {
+                    text: "Couriers Deliveries"
+                },
+                data: [
+                    {
+                        type: "column",
+                        dataPoints: [
+                            { label: "Magnus Carlsen", y: JSON.parse('@Html.Raw(ViewBag.Magnus)') },
+                            { label: "Fabiano Caruana", y: JSON.parse('@Html.Raw(ViewBag.Caruana)') }
+                        ]
+                    }
+                ]
+            });
+            chart.render();
+        };
+    </script>
+  
+}
